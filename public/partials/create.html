@@ -1,0 +1,177 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/view">Tickets</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#/create">Create</a></li>
+                <li><a href="#/view">View Tickets</a></li>
+            </ul>
+            <span class="pull-right button-danger"><a class="navbar-brand" href="#/logout">Logout</a></span>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+
+    <form class="form-horizontal">
+
+        <div ng-if="editMode == true">
+            <div class="form-group">
+                <label for="ticket-created-date" class="col-sm-2 control-label">Created Date</label>
+                <div class="col-sm-10">
+                    <span id="ticket-created-date" class="form-control" disabled>{{data.createdDate | date:'medium'}}</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ticket-created-by" class="col-sm-2 control-label">Created By</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="ticket-created-by" ng-model="data.createdBy.name" disabled>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ticket-status" class="col-sm-2 control-label">Status</label>
+                <div class="col-sm-10">
+                    <input class="form-control" id="ticket-status" placeholder="Please Enter description..." ng-model="data.status" disabled>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="form-group">
+            <label for="add-ticket-title" class="col-sm-2 control-label">Summary</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="add-ticket-title" placeholder="Issue Brief" ng-model="data.title" ng-disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="type-select" class="col-sm-2 control-label"> Type </label>
+            <div class="col-sm-10">
+                <select name="priority" class="form-control" id="type-select" ng-model="data.type" ng-disabled="disabled">
+                    <option value="delayed_delivery">Delayed Delivery</option>
+                    <option value="not_delivered">Not Delivered</option>
+                    <option value="pQuality">Product Quality</option>
+                    <option value="packaging">Packaging</option>
+                    <option value="payment">Payment</option>
+                    <option value="cancel">Cancellations</option>
+                    <option value="return">Returns</option>
+                    <option value="technical">Technical Issues</option>
+                    <option value="address">Address Change</option>
+                    <option value="return">Others</option>
+                </select>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="assign-select" class="col-sm-2 control-label"> Assign To </label>
+            <div class="col-sm-10">
+                <select name="priority" class="form-control" id="assign-select" ng-model="data.assign" ng-disabled="disabled">
+                    <option value="smith">SMITH</option>
+                    <option value="johnson">JOHNSON</option>
+                </select>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="priority-select" class="col-sm-2 control-label"> Priority </label>
+            <div class="col-sm-10">
+                <select name="priority" class="form-control" id="priority-select" ng-model="data.priority" ng-disabled="disabled">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                    <option value="urgent">Urgent</option>
+                    <option value="critical">Critical</option>
+                    <option value="immediate">Immediate</option>
+                </select>
+
+            </div>
+        </div>
+        <hr>
+        <div class="form-group">
+            <label for="add-ticket-customer-id" class="col-sm-2 control-label">Customer Id</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="add-ticket-customer-id" placeholder="45612987363" ng-model="data.c_id" ng-disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="add-ticket-customer-name" class="col-sm-2 control-label">Customer Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="add-ticket-customer-name" placeholder="Jhon Doe" ng-model="data.c_name" ng-disabled="disabled">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="add-ticket-customer-number" class="col-sm-2 control-label">Contact Number</label>
+            <div class="col-sm-10">
+                <input type="tel" class="form-control" id="add-ticket-customer-number" placeholder="0804568965" ng-model="data.c_number" ng-disabled="disabled">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="ticket-description" class="col-sm-2 control-label">Description</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" rows="5" id="ticket-description" placeholder="Please Enter description..." ng-model="data.description" ng-disabled="disabled">
+            </textarea>
+                </div>
+        </div>
+
+        <div ng-if="editMode == true">
+            <hr>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button ng-model="button" class="btn btn-primary" ng-click="updateTicket()" ng-disabled="disabled">Update Ticket</button>
+                    <button ng-model="button" class="btn btn-success" ng-click="resolve()" ng-disabled="disabled">Resolve Ticket</button>
+                    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div ng-if="editMode != true">
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button ng-model="button" type="submit" class="btn btn-primary" ng-click="addTicket()" ng-disabled="disabled">Create Ticket</button>
+                    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div ng-if="editMode == true">
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="add-comment-text" placeholder="Please add your comments..." ng-model="data.comment" ng-disabled="disabled"></textarea>
+                        </div>
+                        <div class="col-sm-2">
+                            <button  ng-model="button" class="btn btn-success" ng-click="addComment()" ng-disabled="disabled">Add Comment</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div ng-if="hasComments == true">
+                <div class="form-group" ng-repeat="comment in comments">
+                    <div class="col-sm-2">
+                        {{comment.createdBy.name}} <br> {{comment.createdDate | date:'short'}}
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <textarea class="form-control" ng-model="comment.text" disabled></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

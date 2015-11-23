@@ -1,0 +1,58 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#/view">Tickets</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#/create">Create</a></li>
+                <li><a href="#/view">View Tickets</a></li>
+            </ul>
+            <span class="pull-right"><a class="navbar-brand" href="#/logout">Logout</a></span>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+    <h3>View Issues</h3>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Status</th>
+            <th>Summary</th>
+            <th>Created Date</th>
+            <th>Created By</th>
+            <th>Assigned To</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <div infinite-scroll='loadMore()'>
+            <tr ng-repeat="ticket in tickets">
+                <td class="col-md-1">{{ticket.status}}</td>
+                <td class="col-md-4">
+                    {{ticket.title}}
+                </td>
+                <td class="col-md-2">{{ticket.createdDate | date:'medium'}}</td>
+                <td class="col-md-2">{{ticket.createdBy.name}}</td>
+                <td class="col-md-2">{{ticket.assign}}</td>
+                <td class="col-md-1">
+                    <button type="button" class="btn btn-primary btn-xs" ng-click="viewTicket(ticket.id)">View</button>
+                </td>
+            </tr>
+        </div>
+        </tbody>
+    </table>
+</div>

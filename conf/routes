@@ -1,0 +1,28 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+
+# Home page
+GET        /login                               controllers.Application.login()
+GET        /logout                              controllers.Application.logout()
+GET        /hasLoggedIn                         controllers.Application.hasLoggedIn()
+
+POST       /login                               controllers.Application.authenticate()
+
+POST       /register                            controllers.Application.register()
+
+
+GET        /                                    controllers.Application.index()
+
+POST       /app/ticket                          controllers.Application.addTicket()
+PUT        /app/ticket                          controllers.Application.updateTicket()
+GET        /app/ticket                          controllers.Application.getTickets(page:Integer ?= 0, size:Integer ?= 20)
+GET        /app/ticket/:id                      controllers.Application.getTicket(id:String)
+
+GET        /app/comment/:ticketId               controllers.CommentsController.getComments(ticketId:String)
+POST       /app/comment                         controllers.CommentsController.addComment()
+
+
+# Map the JS resource paths
+GET        /*file                               controllers.Assets.versioned(path="/public", file: Asset)
