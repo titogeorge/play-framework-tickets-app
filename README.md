@@ -1,4 +1,4 @@
-# play-framework-tickets-app
+# Play framework Tickets Application
 
 A Demo application built with
 
